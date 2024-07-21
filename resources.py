@@ -13,6 +13,12 @@ class Entry:
         self.entries.append(entry)
         entry.parent = self
 
-    def print_entries(self):
+    def print_entries(self, indent=0):
+        print_with_indent(self, indent)
         for e in self.entries:
-            print(e)
+            e.print_entries(indent + 1)
+
+
+def print_with_indent(value, indent=0):
+    indentation = '\t' * indent
+    print(f'{indentation}{value}')
