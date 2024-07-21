@@ -3,8 +3,8 @@ class Entry:
         if entries is None:
             entries = []
         self.title = title
-        self.parent = parent
         self.entries = entries
+        self.parent = parent
 
     def __str__(self):
         return self.title
