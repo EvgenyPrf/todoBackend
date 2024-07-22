@@ -24,6 +24,13 @@ class Entry:
             'entries': [entry.json() for entry in self.entries]
         }
 
+    @classmethod
+    def from_json(cls, value):
+        new_entry = cls(value['title'])
+        for entry in value.get('entries', []):
+            new_entry.add_entry(cls.from_json(entry))
+        return new_entry
+
 
 def print_with_indent(value, indent=0):
     indentation = '\t' * indent
