@@ -1,3 +1,6 @@
+import json
+
+
 class Entry:
     def __init__(self, title, entries=None, parent=None):
         if entries is None:
@@ -23,6 +26,16 @@ class Entry:
             'title': self.title,
             'entries': [entry.json() for entry in self.entries]
         }
+
+    def save(self, path):
+        with open(f'{path}/{self.title}.json', 'w') as file:
+            json.dump(self.json(), file)
+
+    @classmethod
+    def load(cls, path):
+        with open(path, 'r') as file:
+            tmp = json.load(file)
+        return cls.from_json(tmp)
 
     @classmethod
     def from_json(cls, value):
